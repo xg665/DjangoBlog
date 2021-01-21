@@ -1,0 +1,21 @@
+{% extends "blogs/index.html" %}
+
+{% block content %}
+<CardGroup class="cardContainer">
+{% for question in latest_question_list %}
+	<div class="card" style="margin: 15px;">
+	  	<div class="card-header">
+	    	Leetcode Problem
+	  	</div>
+	  	<div class="card-body">
+	    	<h5 class="card-title">{{question.title}}</h5>
+	    	<p class="card-text">{{question.content}}</p>
+	    	<a href="{{question.url}}" class="btn btn-primary">Check out this problem</a>
+	  	</div>
+	  	<div class="card-footer text-muted">
+    		{{question.pub_date}}
+  		</div>
+	</div>
+{% endfor %}
+</CardGroup>
+{% endblock %}
