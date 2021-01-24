@@ -14,10 +14,17 @@ from pathlib import Path
 import os
 import json
 
-with open('/etc/config.json') as config_file:
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+config_address = os.path.join(Path(__file__).resolve().parent,'config.json')
+
+if 'ENV' in os.environ.keys():
+    config_address = '/etc/config.json'
+
+with open(config_address) as config_file:
 	config = json.load(config_file)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +36,12 @@ SECRET_KEY = config['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['3.136.238.219','www.traprainwater.com']
+hosts = ['*']
+
+if 'ENV' in os.environ.keys():
+    hosts = ['3.136.238.219','www.traprainwater.com']
+
+ALLOWED_HOSTS = hosts
 
 
 # Application definition
