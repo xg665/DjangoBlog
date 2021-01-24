@@ -1,0 +1,16 @@
+#post_btn {
+
+	position: absolute !important;
+
+	right: 10px;
+}
+
+.cardContainer {
+
+  display: grid;
+
+  grid-template-columns: 33% 33% 33%;
+
+  padding: 20px;
+  
+}
