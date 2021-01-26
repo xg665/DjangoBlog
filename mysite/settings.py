@@ -34,7 +34,7 @@ with open(config_address) as config_file:
 SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False if 'ENV' in os.environ.keys() else True
 
 hosts = ['*']
 
@@ -47,6 +47,7 @@ ALLOWED_HOSTS = hosts
 # Application definition
 
 INSTALLED_APPS = [
+    'user.apps.UserConfig',
     'blogs.apps.BlogsConfig',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -131,9 +133,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
+
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'blogs:index'

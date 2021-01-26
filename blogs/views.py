@@ -1,7 +1,11 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from pathlib import Path
 from django.template import Context, loader
 from django.shortcuts import get_object_or_404, render, reverse
 from .models import Post
+from django.views.generic.edit import CreateView,UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 def index(request):
 	
@@ -15,20 +19,78 @@ def leetcode(request):
 
 	return render(request, 'blogs/leetcode.html',{'latest_question_list':latest_question_list})
 
-def post(request):
 
-	title = request.POST['title']
+class PostDetail(DetailView):
 
-	content = request.POST['content']
+	model = Post
 
-	category = 'lc'
+class PostDelete(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
 
-	url = request.POST['url']
+	login_url = '/blogs/login/'
 
-	p = Post(title=title,content=content,category=category,url=url)
+	redirect_field_name='blogs:login'
 
-	p.save()
+	model = Post
 
-	return HttpResponseRedirect(reverse('blogs:leetcode'))
+	success_url = '/'
+
+	def test_func(self):
+		return self.get_object().user==self.request.user
+
+	def get_success_url(self):
+	# Assuming there is a ForeignKey from Comment to Post in your model
+		post = self.get_object()
+		return reverse('blogs:leetcode')
+
+class PostUpdate(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+
+	login_url = '/blogs/login/'
+
+	redirect_field_name='blogs:login'
+
+	model = Post
+
+	fields = ['title','content','url']
+
+	def test_func(self):
+		
+		return self.get_object().user==self.request.user
+
+	def form_valid(self,form):
+		
+		form.instance.user = self.request.user
+		
+		return super().form_valid(form)
+
+	def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+		context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+		context['latest_question_list'] = [self.get_object()]
+		context['path'] = Path(self.request.path).parent
+		return context
 
 
+class PostCreate(LoginRequiredMixin,CreateView):
+
+	# print(request.path)
+
+	login_url = '/blogs/login/'
+
+	redirect_field_name='blogs:login'
+
+	model = Post
+
+	fields = ['title','content','url']
+	
+	def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+		context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+		context['latest_question_list'] = Post.objects.all()
+		context['path'] = Path(self.request.path).parent
+		return context
+
+	def form_valid(self,form):
+		form.instance.user = self.request.user
+		return super().form_valid(form)

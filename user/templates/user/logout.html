@@ -1,0 +1,15 @@
+{% extends "blogs/index.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div style="padding: 2rem;">
+<form method="POST" action="{% url 'blogs:logout' %}">
+		{% csrf_token %}
+		<div class="form-control">
+			{{form|crispy}}
+		</div>
+</form>
+</div> 
+{% endblock %}

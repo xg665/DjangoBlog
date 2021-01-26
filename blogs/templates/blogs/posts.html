@@ -1,0 +1,27 @@
+{% extends "blogs/leetcode.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block modal %}
+<div class="modal" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">What would you like to post?</h5>
+        <a href="{{path}}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="post_form">
+        	<div class="mb-3">
+				{% csrf_token %}
+
+				{{ form | crispy }}
+
+				<input type="submit">
+			</div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -10,10 +10,12 @@
 	<link rel="stylesheet" href="{% static 'blogs/css/bootstrap.css' %}">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
-<body>
-	<ul class="nav nav-tabs">
-	  	<li class="nav-item">
-	    	<a class="nav-link" href="{{request.path}}">Leetcode总结</a>
+<body style="background-color: #f5f5f5 !important">
+	
+	<ul class="nav nav-tabs" style="background-color: white">
+		
+	  	<li class="nav-item" style="margin-left: 20px;">
+	    	<a class="nav-link" href="{% url 'blogs:index'%}">Leetcode总结</a>
 	  	</li>
 	  	<li class="nav-item">
 	    	<a class="nav-link disabled" href="#">美女</a>
@@ -21,40 +23,36 @@
 	  	<li class="nav-item">
 	    	<a class="nav-link disabled" href="#">Disabled</a>
 	  	</li>
-	  	
-  		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  			<button type="button" id="post_btn" class="btn btn-primary me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModalLive" style="position: absolute;right: 5%;">Post</button>
+	  	<li class="nav-item">
+  		<div class="d-grid gap-2 d-md-flex">
+  			
+  			{% if user.is_authenticated %}
+	  			<a href="{% url 'blogs:post' %}?next={{request.path}}"><button type="button" id="post_btn" class="btn btn-primary me-md-2">Post</button></a>
+	  			<a href="{% url 'blogs:logout' %}?next={{request.path}}"><button type="button" id="logout_btn" class="btn btn-primary me-md-2" >Log out</button></a>
+  			{% else %}
+  				<a href="{% url 'blogs:register' %}"><button type="button" id="reg_btn" class="btn btn-primary me-md-2" >Register</button></a>
+  				<a href="{% url 'blogs:login' %}"><button type="button" id="sign_btn" class="btn btn-primary me-md-2" >Sign In</button></a>
+  			{% endif %}
+  			
 		</div>
-	  	<div class="modal" aria-labelledby="exampleModalLiveLabel" id="exampleModalLive" style="display: none" aria-hidden="true" tabindex="-1">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title">What would you like to post?</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		        <form action="{% url 'blogs:post' %}" method="post" id="post_form">
-		        	<div class="mb-3">
-						{% csrf_token %}
-						<label for="Title" class="form-label">Title</label>
-						<input type="text" class="form-control" name="title" placeholder="Problem #">
-
-						<label for="FormControlText" class="form-label">Problem Description</label>
-						<textarea class="form-control" form="post_form" name="content" placeholder="用到的算法，相关题型..."></textarea>
-
-						<label for="FormControlUrl" class="form-label">Url</label>
-						<input type="text" class="form-control" name="url">
-
-						<input type="submit">
-					</div>
-				</form>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+		</li>
+	  	{% block modal %}{% endblock %}
 	</ul>
-	{% block content %}{% endblock %}
+	
+	<div class="container-xl" style="display: flex;flex-direction: row;min-height: 1000px;">
+		
+		<div class="main-section">
+			{% block content %}{% endblock %}
+		</div>
+		
+		<div class="sidebar">
+			
 
+		</div>
+
+
+	</div>
+	<div>
 </body>
 </html>
 

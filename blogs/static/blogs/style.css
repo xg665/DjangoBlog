@@ -7,10 +7,24 @@
 
 .cardContainer {
 
-  display: grid;
-
-  grid-template-columns: 33% 33% 33%;
-
   padding: 20px;
   
+}
+
+.main-section {
+
+	width: 70%;
+	
+}
+
+.sidebar {
+
+	width: 30%;
+
+}
+
+.form-group {
+
+	margin: 15px; 
+
 }
