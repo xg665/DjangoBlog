@@ -2,31 +2,36 @@
 
 {% block content %}
 
-<div class="card mb-3" style="max-width: 750px;">
-	<div class="row g-0">
-	    <div class="col-md-4">
-	      	<!-- <img src="..." alt="..."> -->
-	    </div>
-	    <div class="col-md-8">
+<div class="card mb-3">
+	
+	    
+	   
 			<div class="card" style="margin: 15px;">
 			  	<div class="card-header" style="background-color: white">
-			    	Leetcode Problem
+			    	Leetcode Problem #{{object.problem_num}}
 			  	</div>
 			  	<div class="card-body">
-			    	<h5 class="card-title">{{object.title}}</h5>
-			    	<p class="card-text">{{object.content}}</p>
-			    	<a href="{{object.url}}" class="btn btn-primary">Check out this problem</a>
-			    	{% if object.user.username == request.user.username %}
-					<a href="{% url 'blogs:post-update' object.id %}" class="btn btn-secondary">Update</a>
-					<a href="{% url 'blogs:post-delete' object.id %}" class="btn btn-danger">Delete</a>
-					{% endif %}
+
+			    	<h3 class="card-title" style="font-weight: bold;">{{object.title}}</h3>
+			   
+			    	<p class="card-text" style="font-size: 15px;">{{object.description}}</p>
+			    	<p class="card-text" style="font-size: 15px;"><textarea class="code-content">{{object.content}}</textarea></p>
+			    	
+			    	
 			  	</div>
-			  	<div class="card-footer text-muted" style="background-color: white">
-					posted by: {{object.user.username}} created at: {{object.pub_date}}
+			  	<div class="card-footer text-muted" style="background-color: white;display: flex;">
+					posted by:<div><img src="{{ object.user.profile.image.url}}" style="width: 15px;height: 20px;"></div>{{object.user.username}} created at: {{object.pub_date}}
+				</div>
+				<div class="card-footer">
+				{% if object.user.username == request.user.username %}
+					<a href="{{object.url}}" class="btn btn-outline-primary">Check out this problem</a>
+					<a href="{% url 'blogs:post-update' object.id %}" class="btn btn-outline-secondary">Update</a>
+					<a href="{% url 'blogs:post-delete' object.id %}" class="btn btn-outline-danger">Delete</a>
+				{% endif %}
 				</div>
 			</div>
-		</div>
-  	</div>
+	
+  	
 </div>
 
 {% endblock %}

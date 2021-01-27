@@ -8,7 +8,9 @@
 <form method="POST" action="{% url 'blogs:logout' %}">
 		{% csrf_token %}
 		<div class="form-control">
-			{{form|crispy}}
+			<div class="input-group mb-3" style="margin-left: 15px;">
+				{{form|crispy}}
+			</div>
 		</div>
 </form>
 </div> 

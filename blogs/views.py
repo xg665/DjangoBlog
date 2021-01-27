@@ -6,6 +6,7 @@ from .models import Post
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .forms import BlogForm
 # Create your views here.
 def index(request):
 	
@@ -48,9 +49,11 @@ class PostUpdate(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
 
 	redirect_field_name='blogs:login'
 
+	form_class = BlogForm
+	
 	model = Post
 
-	fields = ['title','content','url']
+	#fields = ['title','description','code','url']
 
 	def test_func(self):
 		
@@ -79,9 +82,18 @@ class PostCreate(LoginRequiredMixin,CreateView):
 
 	redirect_field_name='blogs:login'
 
-	model = Post
+	form_class = BlogForm
+	# model = Post
 
-	fields = ['title','content','url']
+	# fields = ['title','description','content','url']
+
+	# class meta(object):
+	# 	"""docstring for meta"""
+	# 	labels = {
+	# 		'name': _('Writer'),
+	# 	}
+			
+	
 	
 	def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context

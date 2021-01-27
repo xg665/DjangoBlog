@@ -1,10 +1,13 @@
 {% extends "blogs/index.html" %}
 
+{% load crispy_forms_tags %}
 
 {% block content %}
 <form method="POST">
 	{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit">
+	<div class="mb-3 row">
+    	<label for="exampleFormControlInput1" class="form-label"><p>Are you sure you want to delete "{{ object }}"?</p></label>
+    	
+	</div><input class="btn btn-outline-primary mb-3" type="submit">
 </form>
 {% endblock content %}

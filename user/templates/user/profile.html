@@ -1,0 +1,43 @@
+{% extends "blogs/leetcode.html" %}
+
+{% block content %}
+<div class="profile-wrapper">
+	<div class="profile_side" style="padding: 20px;">
+
+		<div class="card mb-3">
+			<div class="row g-0">
+				<h5 style="padding: 15px">Basic Profile</h5>
+			</div>
+		  	<div class="row g-0" style="min-height: 100px;">
+		    	<div class="col-md-4" style="display: flex;justify-content: center;align-items: center;">
+		      		<img src="{{ user.profile.image.url}}" style="height: 60%;width: 50%;margin-bottom: 10px;">
+		    	</div>
+			    <div class="col-md-8">
+			      	<div class="card-body">
+			        	<h5 class="card-title">{{user.username}}</h5>
+			        	<p class="card-text"><small class="text-muted">Joined on {{user.date_joined | date:'Y-m-d'}}</small></p>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>	
+
+	</div>
+	<div class="recent_posts" style="padding: 20px;padding-top: 0px;">
+		<div class="list-group">
+		  <a href="#" class="list-group-item list-group-item-action disabled" aria-current="true">
+		    Recent Blogs
+		  </a>
+		  {% if posts %}
+			  {% for p in posts %}
+			  		<a href="{% url 'blogs:post-detail' p.id %}" class="list-group-item list-group-item-action" aria-current="true">
+			    		{{p.title}}
+			    		<p style="float: right;">{{p.pub_date | date:'Y-m-d H:i'}}</p>
+			  		</a>
+			  {% endfor %}
+		  {% endif %}
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}

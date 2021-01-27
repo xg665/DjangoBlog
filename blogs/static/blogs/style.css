@@ -13,7 +13,7 @@
 
 .main-section {
 
-	width: 70%;
+	width: 100%;
 	
 }
 
@@ -27,4 +27,27 @@
 
 	margin: 15px; 
 
+}
+
+.profile_side {
+
+	width: 30%;
+
+	min-width: 500px;
+
+}
+
+.profile-wrapper {
+
+	display: flex;
+
+	flex-direction: column;
+
+}
+.CodeMirror {
+	border: 1px solid #ced4da;
+}
+
+textarea[name="description"] {
+	height: 100px;
 }

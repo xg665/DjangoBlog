@@ -4,7 +4,7 @@
 
 {% block modal %}
 <div class="modal" style="display: block;">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable" style="min-width: 800px;">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">What would you like to post?</h5>
@@ -15,9 +15,11 @@
         	<div class="mb-3">
 				{% csrf_token %}
 
-				{{ form | crispy }}
+				{{ form | crispy}}
 
-				<input type="submit">
+				<div class="input-group mb-3" style="margin-left: 15px;">
+          <input class="btn btn-outline-primary mb-3" type="submit">
+        </div>
 			</div>
 		</form>
       </div>

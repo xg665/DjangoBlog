@@ -9,8 +9,11 @@
 		{% csrf_token %}
 		<div class="form-control">
 			{{form|crispy}}
+			<div class="input-group mb-3" style="margin-left: 15px;">
+				<input class="btn btn-outline-primary mb-3" type="submit">
+			</div>
 		</div>
-		<input type="submit">		
+			
 </form>
 </div> 
 {% endblock %}

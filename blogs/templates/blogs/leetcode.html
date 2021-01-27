@@ -3,14 +3,13 @@
 {% block content %}
 <CardGroup class="cardContainer">
 {% for question in latest_question_list %}
-	<div class="card" style="margin: 15px;">
+	<div class="card" style="margin-bottom: 15px;">
 	  	<div class="card-header" style="background-color: white">
-	    	Leetcode Problem
+	    	Leetcode Problem #{{question.problem_num}}
 	  	</div>
 	  	<div class="card-body">
 	    	<a href="{% url 'blogs:post-detail' question.id %}"><h5 class="card-title">{{question.title}}</h5></a>
-	    	<p class="card-text">{{question.content}}</p>
-	    	<a href="{{question.url}}" class="btn btn-primary">Check out this problem</a>
+	    	<a href="{{question.url}}" class="btn btn-outline-primary">Check out this problem</a>
 	  	</div>
 	  	<div class="card-footer text-muted" style="background-color: white">
     		posted by: {{question.user.username}} created at: {{question.pub_date}}

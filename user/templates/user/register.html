@@ -8,11 +8,12 @@
 <form action="{% url 'blogs:register' %}" method="post" id="post_form">
 		{% csrf_token %}
 		<div class="form-control">
-			{{form|crispy}}
-
-			<input type="submit">
+			{{form|crispy}}	
+			<div class="input-group mb-3" style="margin-left: 15px;">
+				<input class="btn btn-outline-primary mb-3" type="submit">
+			</div>
 		</div>
-		
+	
 		
 </form>
 </div> 

@@ -3,6 +3,7 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from user.views import register as register_views
+from user.views import profile as profile_views
 from django.contrib.auth import views as auth_views
 
 app_name = 'blogs'
@@ -16,6 +17,7 @@ urlpatterns = [
     path('leetcode/',views.leetcode, name='leetcode'),
     path('register/', register_views, name='register'),
     path('login/',auth_views.LoginView.as_view(template_name='user/login.html'),name='login'),
-    path('logout/',auth_views.LogoutView.as_view(template_name='user/logout.html'),name='logout')
+    path('logout/',auth_views.LogoutView.as_view(template_name='user/logout.html'),name='logout'),
+    path('profile/',profile_views.as_view(),name='profile')
 
 ]
