@@ -4,6 +4,7 @@ from .forms import registerForm
 from blogs.models import Post
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -19,21 +20,21 @@ def register(request):
 
 	return render(request,'user/register.html',{'form':form})
 
-class profile(LoginRequiredMixin,View):
+class profile(View):
 
-	login_url = '/blogs/login/'
+	# login_url = '/blogs/login/'
 
-	redirect_field_name='blogs:login'
+	# redirect_field_name='blogs:login'
 
 	template_name = 'user/profile.html'
 
 	
 	def get(self,request,*args,**kwargs):
-		
+		# print(self.kwargs['slug'])
+		u = User.objects.get(username=self.kwargs['slug'])
 		context = {
-
-				'posts':Post.objects.filter(user=request.user)
-
+				'target_user': u,
+				'posts':Post.objects.filter(user=u),
 		}
 		return render(request,self.template_name,context)
 

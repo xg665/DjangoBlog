@@ -10,12 +10,12 @@
 			</div>
 		  	<div class="row g-0" style="min-height: 100px;">
 		    	<div class="col-md-4" style="display: flex;justify-content: center;align-items: center;">
-		      		<img src="{{ user.profile.image.url}}" style="height: 60%;width: 50%;margin-bottom: 10px;">
+		      		<img src="{{ target_user.profile.image.url}}" style="height: 60%;width: 50%;margin-bottom: 10px;">
 		    	</div>
 			    <div class="col-md-8">
 			      	<div class="card-body">
-			        	<h5 class="card-title">{{user.username}}</h5>
-			        	<p class="card-text"><small class="text-muted">Joined on {{user.date_joined | date:'Y-m-d'}}</small></p>
+			        	<h5 class="card-title">{{target_user.username}}</h5>
+			        	<p class="card-text"><small class="text-muted">Joined on {{target_user.date_joined | date:'Y-m-d'}}</small></p>
 			      	</div>
 			    </div>
 		  	</div>

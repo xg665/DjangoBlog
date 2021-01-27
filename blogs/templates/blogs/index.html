@@ -21,7 +21,7 @@
 				      	<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="flex-direction: row;">
 				        	{% if user.is_authenticated %}
 				  				<li class="nav-item"><a href="{% url 'blogs:logout' %}?next={{request.path}}"><button type="button" id="logout_btn" class="btn btn-outline-light me-md-2" >Log out</button></a></li>
-				  				<li class="nav-item"><a href="{% url 'blogs:profile' %}?next={{request.path}}"><button type="button" id="logout_btn" class="btn btn-outline-light me-md-2" >Profile</button></a></li>
+				  				<li class="nav-item"><a href="{% url 'blogs:profile' user.username %}?next={{request.path}}"><button type="button" id="logout_btn" class="btn btn-outline-light me-md-2" >Profile</button></a></li>
 				  				<li class="nav-item"><a href="{% url 'blogs:post' %}?next={{request.path}}"><button type="button" id="post_btn" class="btn btn-outline-light me-md-2">Post</button></a></li>
 			  				{% else %}
 			  					<li class="nav-item"><a href="{% url 'blogs:register' %}"><button type="button" id="reg_btn" class="btn btn-outline-light me-md-2" >Register</button></a></li>

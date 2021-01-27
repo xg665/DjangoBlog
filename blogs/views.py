@@ -86,14 +86,6 @@ class PostCreate(LoginRequiredMixin,CreateView):
 	# model = Post
 
 	# fields = ['title','description','content','url']
-
-	# class meta(object):
-	# 	"""docstring for meta"""
-	# 	labels = {
-	# 		'name': _('Writer'),
-	# 	}
-			
-	
 	
 	def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context

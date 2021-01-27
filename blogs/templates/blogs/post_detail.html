@@ -20,7 +20,8 @@
 			    	
 			  	</div>
 			  	<div class="card-footer text-muted" style="background-color: white;display: flex;">
-					posted by:<div><img src="{{ object.user.profile.image.url}}" style="width: 15px;height: 20px;"></div>{{object.user.username}} created at: {{object.pub_date}}
+					posted by:<div><a href="{% url 'blogs:profile' object.user.username%}"><img src="{{ object.user.profile.image.url}}" style="width: 15px;height: 20px;"></a>
+					{{object.user.username}}</div> &nbsp created at: {{object.pub_date}}
 				</div>
 				<div class="card-footer">
 				{% if object.user.username == request.user.username %}
