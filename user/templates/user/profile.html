@@ -16,6 +16,9 @@
 			      	<div class="card-body">
 			        	<h5 class="card-title">{{target_user.username}}</h5>
 			        	<p class="card-text"><small class="text-muted">Joined on {{target_user.date_joined | date:'Y-m-d'}}</small></p>
+			        	{% if user.is_authenticated and user.username == target_user.username %}
+			        	<p class="card-text"><a href="{% url 'blogs:profile-update' user.username %}">Edit?</a></p>
+			        	{% endif %}
 			      	</div>
 			    </div>
 		  	</div>

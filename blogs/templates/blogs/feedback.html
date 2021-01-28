@@ -1,0 +1,17 @@
+{% extends "blogs/index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post">
+	<div class="mb-3">
+		{% csrf_token %}
+
+		{{ form | crispy}}
+
+		<div class="input-group mb-3" style="margin-left: 15px;">
+        	<input class="btn btn-outline-primary mb-3" type="submit">
+        </div>
+	</div>
+</form>
+
+
+{% endblock %}

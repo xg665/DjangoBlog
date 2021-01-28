@@ -32,3 +32,18 @@ class Post(models.Model):
 	def get_absolute_url(self):
 		return reverse('blogs:post-detail',kwargs={'pk':self.pk})
 
+class Feedback(models.Model):
+
+	pub_date = models.DateTimeField(default=timezone.now)
+
+	title =  models.CharField(max_length=200)
+
+	description = models.TextField()
+
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return "Feedback:{title} by {user}".format(title = self.title, user = self.user)
+
+	def get_absolute_url(self):
+		return reverse('blogs:index')

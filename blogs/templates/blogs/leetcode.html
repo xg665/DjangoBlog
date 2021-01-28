@@ -1,20 +1,41 @@
 {% extends "blogs/index.html" %}
 
 {% block content %}
-<CardGroup class="cardContainer">
-{% for question in latest_question_list %}
-	<div class="card" style="margin-bottom: 15px;">
-	  	<div class="card-header" style="background-color: white">
-	    	Leetcode Problem #{{question.problem_num}}
-	  	</div>
-	  	<div class="card-body">
-	    	<a href="{% url 'blogs:post-detail' question.id %}"><h5 class="card-title">{{question.title}}</h5></a>
-	    	<a href="{{question.url}}" class="btn btn-outline-primary">Check out this problem</a>
-	  	</div>
-	  	<div class="card-footer text-muted" style="background-color: white;display: flex;">
-    		posted by: <div><a href="{% url 'blogs:profile' question.user.username %}"><img src="{{ question.user.profile.image.url}}" style="width: 15px;height: 20px;"></a>{{question.user.username}}  </div> &nbsp created at: {{question.pub_date}}
-  		</div>
+<div class="blogs-wrapper" style="display: flex;flex-direction: row;">
+	
+	<CardGroup class="cardContainer" style="width: 70%">
+	{% for question in latest_question_list %}
+		<div class="card mb-3" style="margin-bottom: 15px;border: unset;border-radius: unset;">
+		  	<div class="row g-0">
+			  	<div class="col-md-4" style="max-width: 80px;background-color: #f5f5f5 !important;padding-right:15px;">
+		      		<a href="{% url 'blogs:profile' question.user.username %}"><img class="img-thumbnail" style="height: 40%;width: 100%;" src="{{ question.user.profile.image.url }}"></a>
+		    	</div>
+		    	<div class="col-md-10">
+			    	<div class="card-header" style="background-color: white">
+				    	Leetcode Problem #{{question.problem_num}}
+				  	</div>
+				  	<div class="card-body">
+				    	<a href="{% url 'blogs:post-detail' question.id %}"><h5 class="card-title">{{question.title}}</h5></a>
+				    	<a href="{{question.url}}" class="btn btn-outline-dark">Check out this problem</a>
+				  	</div>
+				  	<div class="card-footer text-muted" style="background-color: white;display: flex;">
+			    		posted by: <div><a href="{% url 'blogs:profile' question.user.username %}"><img src="{{ question.user.profile.image.url}}" style="width: 15px;height: 20px;"></a>{{question.user.username}}  </div> &nbsp created at: {{question.pub_date}}
+			  		</div>
+			  	</div>
+		  	</div> 	
+		</div>
+	{% endfor %}
+	</CardGroup>
+
+	<div class="card" style="width: 30%;height: fit-content;margin: 20px;">
+	  <div class="card-header">
+	    Featured
+	  </div>
+	  <ul class="list-group list-group-flush">
+	    <a class="list-group-item list-group-item-action" href="https://leetcode.com/problemset/all/" target="_blank">Go Practice Now!</a>
+	    <a class="list-group-item list-group-item-action" href="{% url 'blogs:feedback' %}">Give Us Feedback</a>
+	  </ul>
 	</div>
-{% endfor %}
-</CardGroup>
+
+</div>
 {% endblock %}

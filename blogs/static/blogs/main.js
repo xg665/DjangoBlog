@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 	
 	if(myTextArea.length!=0){
-		const myCodeMirror = CodeMirror.fromTextArea(myTextArea[0]);
+
+		const myCodeMirror = CodeMirror.fromTextArea(myTextArea[0],{
+			lineNumbers: true
+		});
+
 		const txtArea = document.querySelectorAll('textarea');
 		txtArea[1].addEventListener('change',()=>{
 			txtArea[0].value = txtArea[1].value;
@@ -17,7 +21,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 	const code_content = document.querySelector('.code-content');
 	if(code_content!=null){
-		const myCodeMirrorDetail = CodeMirror.fromTextArea(code_content);
+		const myCodeMirrorDetail = CodeMirror.fromTextArea(code_content,{
+			lineNumbers: true
+		});
 	}
 	
 

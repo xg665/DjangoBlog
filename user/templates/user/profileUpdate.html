@@ -1,0 +1,29 @@
+{% extends "blogs/leetcode.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="profile-update-header" style="height:300px;background:linear-gradient(-150deg, #222222 15%, #373737 70%, #3c4859 94%)">
+	<div class="row g-0" style="min-height: 100px;align-items: center;">
+    	<div class="col-md-4" style="display: flex;justify-content: center;padding-top: 5%">
+      		<img src="{{ user.profile.image.url}}" style="height: 80%;width: 50%;margin-bottom: 10px;">
+    	</div>
+	    <div class="col-md-8">
+	      	<div class="card-body">
+	        	<h5 class="card-title" style="color: white">{{user.username}}</h5>
+	        	<p class="card-text" style="color: white"><small class="text-muted">Joined on {{user.date_joined | date:'Y-m-d'}}</small></p>
+	      	</div>
+	    </div>
+	</div>
+</div>
+<div class="profile-update-content">
+	<form action="" method="POST" enctype="multipart/form-data">
+    	<div class="mb-3">
+			{% csrf_token %}
+			{{ u_form | crispy}}
+			{{ p_form | crispy}}
+			<div class="input-group mb-3" style="margin-left: 15px;">
+      			<input class="btn btn-outline-primary mb-3" type="submit">
+    		</div>
+		</div>
+	</form>
+</div>
+{% endblock %}

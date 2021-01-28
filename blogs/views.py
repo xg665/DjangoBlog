@@ -2,11 +2,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from pathlib import Path
 from django.template import Context, loader
 from django.shortcuts import get_object_or_404, render, reverse
-from .models import Post
+from .models import Post, Feedback
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import BlogForm
+from django.views import View
 # Create your views here.
 def index(request):
 	
@@ -94,6 +95,20 @@ class PostCreate(LoginRequiredMixin,CreateView):
 		context['latest_question_list'] = Post.objects.all()
 		context['path'] = Path(self.request.path).parent
 		return context
+
+	def form_valid(self,form):
+		form.instance.user = self.request.user
+		return super().form_valid(form)
+
+class FeedbackCreate(LoginRequiredMixin,CreateView):
+
+	login_url = '/blogs/login/'
+
+	redirect_field_name='blogs:login'
+
+	model = Feedback
+
+	fields = ['title','description']
 
 	def form_valid(self,form):
 		form.instance.user = self.request.user
