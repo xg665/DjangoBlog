@@ -16,7 +16,7 @@
 				  	</div>
 				  	<div class="card-body">
 				    	<a href="{% url 'blogs:post-detail' question.id %}"><h5 class="card-title">{{question.title}}</h5></a>
-				    	<a href="{{question.url}}" class="btn btn-outline-dark">Check out this problem</a>
+				    	<a href="{{question.url}}" class="btn btn-outline-dark" target="_blank">Check out this problem</a>
 				  	</div>
 				  	<div class="card-footer text-muted" style="background-color: white;display: flex;">
 			    		posted by: <div><a href="{% url 'blogs:profile' question.user.username %}"><img src="{{ question.user.profile.image.url}}" style="width: 15px;height: 20px;"></a>{{question.user.username}}  </div> &nbsp created at: {{question.pub_date}}

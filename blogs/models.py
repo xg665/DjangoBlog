@@ -20,7 +20,7 @@ class Post(models.Model):
 
 	description = models.TextField(default="")
 
-	content = models.TextField(default=" ")
+	content = models.TextField(default=" ",blank=True)
 
 	url = models.URLField(max_length=200,default='https://leetcode.com/problemset/all/')
 

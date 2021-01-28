@@ -3,6 +3,7 @@ from django.shortcuts import render, reverse
 from .forms import registerForm, UserUpdateForm, ProfileUpdateForm
 from blogs.models import Post
 from django.views import View
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -14,7 +15,9 @@ def register(request):
 	if request.method == 'POST':
 		form = registerForm(request.POST)
 		if form.is_valid():
-			form.save()
+			new_user = form.save()
+			new_user = authenticate(username=form.cleaned_data['username'],password=form.cleaned_data['password1'],)        
+			login(request, new_user)
 			return HttpResponseRedirect(reverse('blogs:index'))
 	else:
 		form = registerForm()
